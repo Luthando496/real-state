@@ -2,13 +2,12 @@ import React, { useEffect } from 'react'
 import {FcHome} from 'react-icons/fc'
 import {FaBed,FaSwimmingPool,FaParking} from 'react-icons/fa'
 import {GiBathtub,GiSofa,GiGate} from 'react-icons/gi'
-import {AiOutlineCheck,AiFillPhone} from 'react-icons/ai'
+import {AiOutlineCheck,AiFillPhone,AiFillStar} from 'react-icons/ai'
 import {TiSocialTwitter,TiSocialVimeo} from 'react-icons/ti'
 import { getDetails, getPhotos } from '../Store/Actions/ProductsActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { getProducts } from '../Store/Actions/ProductsActions'
-// import Carousel from 'nuka-carousel';
+import { Reviews } from '../Store/Actions/ProductsActions'
 import Spinner from '../components/Spinner'
 import 'slick-carousel'
 
@@ -18,7 +17,7 @@ import 'slick-carousel'
 const HomeDetails = () => {
 
   const dispatch = useDispatch()
-  const {photos,loading} = useSelector((state) => state.home)
+  const {photos,loading,reviews} = useSelector((state) => state.home)
   const details = useSelector((state) => state.home.houses)
   const {id} = useParams()
   // const loading = useSelector((state) => state.home.loading)
@@ -28,14 +27,15 @@ const HomeDetails = () => {
   useEffect(()=>{
     dispatch(getPhotos(id))
     dispatch(getDetails(id))
-  },[])
+    dispatch(Reviews(id))
+  },[dispatch])
   return (
     <>
-    <header className='w-full relative min-h-[120vh] about'>
+    <header className='w-full relative py-[8rem] min-h-[120vh] about'>
     <img src={photos && photos[0].url_max} alt="dsd" className="absolute top-0 left-0 w-full h-full" />
-    <div className="absolute py-16 space-y-8 top-5 left-5 bg-white px-10 w-[90%] md:w-[35%]">
-      <h1 className="text-5xl tracking-widest font-semibold uppercase text-black">{details?.hotel_name}</h1>
-      <h3 className="uppercase text-2xl">{details?.city_name_en}</h3>
+    <div className="absolute py-16 space-y-8  top-5 left-5 bg-white px-10 w-[90%] lg:w-[35%]">
+      <h1 className="text-xl lg:text-5xl tracking-widest font-semibold uppercase text-black">{details?.hotel_name}</h1>
+      <h3 className="uppercase text-md lg:text-2xl">{details?.city_name_en}</h3>
       <p className="text-xl font-sans">{details?.district}</p>
 
       <h3 className="uppercase text-2xl"> Request Info</h3>
@@ -173,49 +173,10 @@ const HomeDetails = () => {
     {/*  */}
 
     {/*  */}
-    <div className="about-hero w-full mb-40 mt-11">
-    <h1 className="ame text-center uppercase my-3 text-2xl md:text-4xl lg:text-5xl text-black">Amenities</h1>
-      <h3 className="ame text-xl text-center uppercase">Complete List of Amenities and Features</h3>
-
-      <div className="w-[85%] mx-auto flex flex-col md:grid md:grid-cols-4 mt-20">
-      {/*  */}
-      <ul className='space-y-3'>
-        <li className="flex items-center"><AiOutlineCheck fill='yellow' size={20} className='mr-3'/><p>{details && details?.property_highlight_strip && details.property_highlight_strip[0]?.name}</p></li>
-        <li className="flex items-center"><AiOutlineCheck fill='yellow' size={20} className='mr-3'/><p>{details && details?.property_highlight_strip && details.property_highlight_strip[2]?.name}</p></li>
-        <li className="flex items-center"><AiOutlineCheck fill='yellow' size={20} className='mr-3'/><p>{details && details?.property_highlight_strip && details.property_highlight_strip[3]?.name}</p></li>
-        <li className="flex items-center"><AiOutlineCheck fill='yellow' size={20} className='mr-3'/><p>{details && details?.property_highlight_strip && details.property_highlight_strip[1]?.name}</p></li>
-        <li className="flex items-center"><AiOutlineCheck fill='yellow' size={20} className='mr-3'/><p>{details && details?.property_highlight_strip && details.property_highlight_strip[4]?.name}</p></li>
-      </ul>
-      {/*  */}
-      <ul className='space-y-3'>
-        <li className="flex items-center"><AiOutlineCheck fill='yellow' size={20} className='mr-3'/><p>{details && details?.property_highlight_strip && details.property_highlight_strip[5]?.name}</p></li>
-        <li className="flex items-center"><AiOutlineCheck fill='yellow' size={20} className='mr-3'/><p>{details && details?.property_highlight_strip && details.property_highlight_strip[6]?.name}</p></li>
-        <li className="flex items-center"><AiOutlineCheck fill='yellow' size={20} className='mr-3'/><p>{details && details?.property_highlight_strip && details.property_highlight_strip[7]?.name}</p></li>
-        <li className="flex items-center"><AiOutlineCheck fill='yellow' size={20} className='mr-3'/><p>{details && details?.property_highlight_strip && details.property_highlight_strip[8]?.name}</p></li>
-        <li className="flex items-center"><AiOutlineCheck fill='yellow' size={20} className='mr-3'/><p>{details && details?.property_highlight_strip && details.property_highlight_strip[9]?.name}</p></li>
-      </ul>
-      {/*  */}
-      <ul className='space-y-3'>
-        <li className="flex items-center"><AiOutlineCheck fill='blue' size={20} className='mr-3'/><p>Washer and Dryer</p></li>
-        <li className="flex items-center"><AiOutlineCheck fill='blue' size={20} className='mr-3'/><p>Washer and Dryer</p></li>
-        <li className="flex items-center"><AiOutlineCheck fill='blue' size={20} className='mr-3'/><p>Washer and Dryer</p></li>
-        <li className="flex items-center"><AiOutlineCheck fill='blue' size={20} className='mr-3'/><p>Washer and Dryer</p></li>
-        <li className="flex items-center"><AiOutlineCheck fill='blue' size={20} className='mr-3'/><p>Washer and Dryer</p></li>
-      </ul>
-      {/*  */}
-      <ul className='space-y-3'>
-        <li className="flex items-center"><AiOutlineCheck fill='blue' size={20} className='mr-3'/><p>Washer and Dryer</p></li>
-        <li className="flex items-center"><AiOutlineCheck fill='blue' size={20} className='mr-3'/><p>Washer and Dryer</p></li>
-        <li className="flex items-center"><AiOutlineCheck fill='blue' size={20} className='mr-3'/><p>Washer and Dryer</p></li>
-        <li className="flex items-center"><AiOutlineCheck fill='blue' size={20} className='mr-3'/><p>Washer and Dryer</p></li>
-        <li className="flex items-center"><AiOutlineCheck fill='blue' size={20} className='mr-3'/><p>Washer and Dryer</p></li>
-      </ul>
-
-      </div>
-    </div>
+    
     {/*  */}
 
-    <div className="my-28">
+    <div className="my-8">
       <h1 className='text-6xl text-center text-cyan-600 my-3'>Property Photo Gallery</h1>
       <p className='text-center text-xl my-7 text-gray-300'>Elegantly Decorated Home With Iconic Views</p>
 
@@ -233,44 +194,37 @@ const HomeDetails = () => {
     </div>
 
     {/*  */}
-    <div className="w-full my-10">
-    <div className="grid grid-cols-1 gap-y-10 lg:grid-cols-2 w-[80%] mx-auto">
-    {/* card */}
-    <div className="flex flex-col lg:flex-row">
-      <div className="img">
-        <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="losks" className='h-[20rem] w-full' />
-      </div>
-      <div className="px-10 py-10 space-y-4">
-        <h1>Brittany Watkins</h1>
-        <div className="flex">
-        <AiFillPhone size={50} />
-        <TiSocialVimeo size={50} />
-        <TiSocialTwitter size={50} />
+    <div className="w-full py-[9rem] my-[1rem]">
 
-        </div>
-        <p>1233-2456-7778</p>
-        <p>1233-2456-9930</p>
-      </div>
+    <h1 className="text-center text-5xl font-bold text-cyan-600">Reviews</h1>
+
+    {reviews?.result?.slice(0,9).map((review, index) => (
+      <article key={index} className='w-[95%] mb-4 mt-8 lg:w-[70%] ml-[5rem] bg-teal-700 py-4 px-8 overflow-hidden min-h-[40vh]' >
+    <div className='px-8 flex gap-2'>
+    <AiFillStar fill='gold' className='text-3xl' />
+    <AiFillStar fill='gold' className='text-3xl' />
+    <AiFillStar fill='gold' className='text-3xl' />
+    <AiFillStar fill='gold' className='text-3xl' />
+    <AiFillStar fill='gold' className='text-3xl' />
+    </div>
+    <div className='px-8 gap-2 w-[70%] mt-2 flex flex-col'>
+      <h2 className='text-xl lg:text-2xl font-bold leading-[1.7] text-amber-500 capitalize'>{review.title}</h2>
+      <p className='leading-[1.8] tracking-[2px] font-thin text-gray-800'>
+      Cons: <span className='text-red-700'>{review.cons}</span> 
+      </p>
+      <p className='leading-[1.8] tracking-[2px] font-bold text-sky-900 text-md'>
+      Pros: <span className=''>{review.pros}</span> 
+      </p>
+      <p className='leading-[1.8] tracking-[2px] font-thin text-gray-200'>
+      Author: <span className=''>{review?.author?.name}</span> 
+      </p>
     </div>
 
-    <div className="flex flex-col lg:flex-row">
-      <div className="img">
-        <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="losks" className='h-[20rem] w-full' />
-      </div>
-      <div className="px-10 py-10 space-y-4">
-        <h1>Brittany Watkins</h1>
-        <div className="flex">
-        <AiFillPhone size={50} />
-        <TiSocialVimeo size={50} />
-        <TiSocialTwitter size={50} />
 
-        </div>
-        <p>1233-2456-7778</p>
-        <p>1233-2456-9930</p>
-      </div>
-    </div>
-
-    </div>
+    </article>
+    ))
+    }
+    
     
 
     </div>

@@ -26,7 +26,7 @@ export const getProducts = (city,room,adults,kids,sort) =>
                     children_ages: '5,0',
                     include_adjacency: 'true',
                     children_number: `${kids}` || '1',
-                    page_number: '0'
+                    page_number: '2'
                   },
                   headers: {
                     'X-RapidAPI-Key': '9ca1b675cbmsh0a118d1e4608e5fp179722jsn09c6585af4f5',
@@ -127,24 +127,29 @@ export const getPhotos = (id) =>
 
 
 
-// export const productDetails = (id) =>
-//     async dispacth =>{
+export const Reviews = (id) =>
+    async dispatch =>{
 
-//         // dispacth(detailsAction.allProductsRequest())
-//         try{
+        // dispatch(detailsAction.allProductsRequest())
+        try{
 
-//             const {data} = await axios.get(`/v1/api/amazona/single-product/${id}`) 
+            const {data} = await axios.get(`https://booking-com.p.rapidapi.com/v1/hotels/reviews`,{
+            params: {locale: 'en-gb', hotel_id: `${id}`, sort_type: 'SORT_MOST_RELEVANT'},
+            headers: {
+                'X-RapidAPI-Key': '9ca1b675cbmsh0a118d1e4608e5fp179722jsn09c6585af4f5',
+                'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
+            }})
 
 
-//             dispacth(detailsAction.ProductDetailsSuccess(data.product))
+            dispatch(productAction.getReviews(data))
 
 
 
-//         }catch(err){
-//             console.log(err)
-//             dispacth(detailsAction.ProductsDetailsFail(err || err.response || err.response.data))
-//         }
-// }
+        }catch(err){
+            console.log(err)
+            // dispatch(detailsAction.ProductsDetailsFail(err || err.response || err.response.data))
+        }
+}
 
 
 

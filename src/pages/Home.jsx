@@ -7,7 +7,13 @@ import {AiFillCheckCircle} from 'react-icons/ai'
 import {ImLocation2} from 'react-icons/im'
 import Carousel from 'nuka-carousel';
 import SimpleMap from '../components/SimpleMap'
-
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 
 
@@ -19,8 +25,30 @@ const Home = () => {
     <>
     {/*  */}
     <div className="w-full">
-        <Carousel>
-        <div className="relative h-[100vh]">
+    <Swiper
+      // install Swiper modules
+      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      effect="fade" // sets the effect to coverflow
+      navigation
+        grabCursor="true" // sets grab cursor as the hover cursor over the slides
+        centeredSlides="true" // used to center the active slide
+        spaceBetween={0} // distance between slides in px
+        slidesPerView={1} // number of slides per view
+        loop="true" // sets the slides on a continuous loop
+        pagination={{ clickable: true, dynamicBullets: true }} // allows for pagination bullets to be dynamic and clickable
+        fadeEffect={{
+          rotate: 20, // slide rotation degree
+          stretch: 25, // stretches the space between the slides in px
+          depth: 250, // offsets the depth of neighboring slides
+          modifier: 1, // effect multiplier
+          slideShadows: false, // disables the shadow around the slide container
+        }}
+    //   scrollbar={{ draggable: true }}
+    //   onSwiper={(swiper) => console.log(swiper)}
+    //   onSlideChange={() => console.log('slide change')}
+    >
+    <SwiperSlide>
+        <div className="relative min-h-[100vh]">
             <div className="card-hero absolute top-0 right-5 w-full h-full z-10 flex items-center justify-end">
                 <div className="bg-white py-6 px-10 rounded-lg w-full lg:w-[50%]">
                 <div  className="flex items-center justify-between">
@@ -41,9 +69,11 @@ const Home = () => {
             </div>
             <img className='absolute top-0 left-0 w-full h-full' src="https://images.pexels.com/photos/8031878/pexels-photo-8031878.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="xsx" />
         </div>
+      
+    </SwiperSlide>
 
-
-        <div className="relative h-[100vh]">
+        <SwiperSlide>
+        <div className="relative min-h-[100vh]">
             <div className="card-hero absolute top-0 right-5 w-full h-full z-10 flex items-center justify-end">
                 <div className="bg-white py-6 px-10 rounded-lg w-full lg:w-[50%]">
                 <div  className="flex items-center justify-between">
@@ -65,7 +95,11 @@ const Home = () => {
             <img className='absolute top-0 left-0 w-full h-full' src="https://images.pexels.com/photos/280222/pexels-photo-280222.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="xsx" />
         </div>
 
-        <div className="relative h-[100vh]">
+        </SwiperSlide>
+
+        <SwiperSlide>
+
+        <div className="relative min-h-[100vh]">
             <div className="card-hero absolute top-0 right-5 w-full h-full z-10 flex items-center justify-end">
                 <div className="bg-white py-6 px-10 rounded-lg w-full lg:w-[50%]">
                 <div  className="flex items-center justify-between">
@@ -86,9 +120,10 @@ const Home = () => {
             </div>
             <img className='absolute top-0 left-0 w-full h-full' src="https://images.pexels.com/photos/5178055/pexels-photo-5178055.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="xsx" />
         </div>
+        </SwiperSlide>
         
 
-        </Carousel>
+        </Swiper>
 
         </div>
     {/*  */}

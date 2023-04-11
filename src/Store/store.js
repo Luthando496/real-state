@@ -5,7 +5,7 @@ import {configureStore,createSlice} from '@reduxjs/toolkit';
 
 const productSlice = createSlice({
     name:'product',
-    initialState:{houses:null,photos:null,loading:true,error:null,resPerPage:null,newProd:{},proErr:null,proLoad:true,image:[] },
+    initialState:{houses:null,photos:null,loading:true,error:null,resPerPage:null,newProd:{},reviews:null,proLoad:true,image:[] },
     reducers:{
         allProductsRequest(state, action){
             state.loading =true
@@ -28,20 +28,17 @@ const productSlice = createSlice({
             state.er =action.payload
             state.loading =false
         },
-        newProduct(state, action){
-            state.newProd = action.payload
-            state.proErr = null
+        getReviews(state, action){
+            state.reviews = action.payload;
+        },
+        newProdFail(state, action){
+            state.newProd = {}
+            state.proErr = action.payload
             state.proLoad = false
         },
         newPhoto(state, action){
             state.image = action.payload
         },
-
-        newProdFail(state, action){
-            state.newProd = {}
-            state.proErr = action.payload
-            state.proLoad = false
-        }
 
     }
 })
