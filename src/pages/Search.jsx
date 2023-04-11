@@ -17,34 +17,35 @@ const Search = () => {
     const [sort,setSort]=useState('popularity')
     const dispatch = useDispatch()
     const {city} = useParams()
+    const year =`${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`
 
     useEffect(()=>{
 
-        dispatch(getProducts(city,room,adults,kids,sort))
+        dispatch(getProducts(city,room,adults,kids,sort,year))
         
     },[city,dispatch,checkin_date])
 
     const SetOrders = (sort) => {
         setSort(sort)
         // console.log(room)
-        dispatch(getProducts(city,room,adults,kids,sort))
+        dispatch(getProducts(city,room,adults,kids,sort,year))
     }
 
     const setRoomNumber = (room) => {
         setRoom(room)
         // console.log(room)
-        dispatch(getProducts(city,room,adults,kids,sort))
+        dispatch(getProducts(city,room,adults,kids,sort,year))
     }
 
     const setAdult = (adults) => {
         setAdults(adults)
         // console.log(room)
-        dispatch(getProducts(city,room,adults,kids,sort))
+        dispatch(getProducts(city,room,adults,kids,sort,year))
     }
     const setKid = (kids) => {
         setAdults(kids)
         // console.log(room)
-        dispatch(getProducts(city,room,adults,kids,sort))
+        dispatch(getProducts(city,room,adults,kids,sort,year))
     }
   return (
     <>
@@ -120,27 +121,27 @@ const Search = () => {
     <div className="w-full my-10">
     {loading ? <Spinner /> :houses ? (
     <div className="w-[95%] mx-auto grid grid-cols-1 gap-10 md:grid-cols-3 ">
-        {houses?.results?.map((h,i)=>(
+        {houses?.result?.map((h,i)=>(
             <div key={h.id} className="flex flex-col space-y-2 border shadow-lg shadow-slate-600">
-            <Link to={`/details/${h.id}`}>
+            <div >
 
-            <div className="img relative overflow-hidden">
-                <img src={h.photoMainUrl} alt="kdkd" className='h-[18rem] object-cover w-full hover:scale-125 duration-300' />
+            <Link to={`/details/${h.id}`}>
+            <div  className="img relative overflow-hidden">
+                <img src={h.max_1440_photo_url || h.photoMainUrl} alt="kdkd" className='h-[18rem] object-cover w-full hover:scale-125 duration-300' />
                 <p className='absolute bottom-0 right-0 bg-green-500 text-white px-4 p-2'>{h.reviewScoreWord}</p>
             </div>
+            </Link>
             <div className='px-6 text-left space-y-3'>
             <h1 className='text-2xl font-semibold title'>{h.name}</h1>
             <h3 className='text-green-500 font-medium'>{h.checkoutDate}</h3>
             <p className='font-medium text-base pb-7'>Enchanting three bedroom, three bath home with spacious one bedroom, one bath</p>
             </div>
-            <div className="card-footer flex p-4 bg-slate-700">
-            <p className='text-sm mr-2'><span className='text-blue-500 text-base '></span> Sq Ft,</p>
-            <p className='text-sm mr-2'><span className='text-blue-500 text-base mr-2'></span>Beds</p>
-            <p className='text-sm mr-2'><span className='text-blue-500 text-base mr-2'></span>Baths,</p>
-            <p className='text-sm mr-2'><span className='text-blue-500 text-base mr-2'></span>Garages</p>
+            <div className="card-footer flex gap-8 px-8 justify-between p-4 bg-slate-700">
+           <Link to={`${h?.url}`} className='bg-sky-600 text-white text-md font-bold py-4 px-6 rounded-xl' >Book Now</Link>
+           <Link to={`/details/${h.id.split('_')[2]}`} className='bg-sky-600 text-white text-md font-bold py-4 px-8 rounded-xl' >Room Details</Link>
           </div>
 
-            </Link>
+            </div>
         </div>   
 
         ))

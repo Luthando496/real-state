@@ -31,7 +31,7 @@ const HomeDetails = () => {
   },[])
   return (
     <>
-    <header className='w-full relative h-[120vh] about'>
+    <header className='w-full relative min-h-[120vh] about'>
     <img src={photos && photos[0].url_max} alt="dsd" className="absolute top-0 left-0 w-full h-full" />
     <div className="absolute py-16 space-y-8 top-5 left-5 bg-white px-10 w-[90%] md:w-[35%]">
       <h1 className="text-5xl tracking-widest font-semibold uppercase text-black">{details?.hotel_name}</h1>

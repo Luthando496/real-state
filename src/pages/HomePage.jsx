@@ -11,6 +11,7 @@ const HomePage = () => {
 
 
 
+
   const Submit =(e)=>{
     e.preventDefault()
     // dispatch(getProducts(city))
@@ -30,6 +31,10 @@ const HomePage = () => {
                 <option value="-1224926">Durban</option>
                 <option value="-574890">Toronto</option>
                 <option value="20088325">New York</option>
+                <option value="-1746443">Berlin</option>
+                <option value="-132007">Venice</option>
+                <option value="20014181">Los Angeles</option>
+                <option value="20015732">San Francisco</option>
                 <option value="2614">Chicago</option>
             </select>
         </div>

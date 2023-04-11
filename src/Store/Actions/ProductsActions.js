@@ -11,7 +11,7 @@ export const getProducts = (city,room,adults,kids,sort) =>
 
             dispatch(productAction.allProductsRequest())
             
-            const {data} = await axios.get(`https://booking-com.p.rapidapi.com/v2/hotels/search`,{
+            const {data} = await axios.get(`https://booking-com.p.rapidapi.com/v1/hotels/search`,{
                 params: {
                     order_by: `${sort}` || 'popularity',
                     adults_number: `${adults}` || '1',
