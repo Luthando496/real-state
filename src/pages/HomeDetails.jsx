@@ -3,10 +3,17 @@ import {FcHome} from 'react-icons/fc'
 import {FaBed,FaSwimmingPool,FaParking} from 'react-icons/fa'
 import {GiBathtub,GiSofa,GiGate} from 'react-icons/gi'
 import {AiOutlineCheck,AiOutlineStar,AiFillStar} from 'react-icons/ai'
-import {TiSocialTwitter,TiSocialVimeo} from 'react-icons/ti'
+// import {TiSocialTwitter,TiSocialVimeo} from 'react-icons/ti'
 import { getDetails, getPhotos } from '../Store/Actions/ProductsActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { Navigation, Pagination, Scrollbar, A11y ,EffectCoverflow} from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+// Import Swiper styles
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 import { Reviews } from '../Store/Actions/ProductsActions'
 import Spinner from '../components/Spinner'
 import 'slick-carousel'
@@ -182,11 +189,39 @@ const HomeDetails = () => {
 
       {loading ? <Spinner /> : ''}
 
-      <div className="w-11/12 mx-auto mt-4 grid grid-cols-2 md:grid-cols-4 gap-1">
+      <div className="w-11/12 mx-auto gap-1">
+      <Swiper  
+      className='hidden lg:block'
+        // install Swiper modules
+      modules={[Navigation, Pagination, Scrollbar, A11y,EffectCoverflow]}
+      effect={'coverflow'} // sets the effect to coverflow
+      // navigation
+        grabCursor="true" // sets grab cursor as the hover cursor over the slides
+        centeredSlides="true" // used to center the active slide
+        spaceBetween={50} // distance between slides in px
+        slidesPerView={3} // number of slides per view
+        loop="true" // sets the slides on a continuous loop
+        pagination={{ clickable: true, dynamicBullets: true }} // allows for pagination bullets to be dynamic and clickable
+        coverflowEffect={{
+          rotate: 0, // slide rotation degree
+          stretch: 0, // stretches the space between the slides in px
+          depth: 100, // offsets the depth of neighboring slides
+          modifier: 2.5, // effect multiplier
+          // slideShadows: false, // disables the shadow around the slide container
+        }}
+    //   scrollbar={{ draggable: true }}
+    //   onSwiper={(swiper) => console.log(swiper)}
+    //   onSlideChange={() => console.log('slide change')}
+      
+      >
+
       {photos?.map((photo, index) => (
-        <img key={index} className='h-60 rounded-lg w-full' src={photo.url_max} alt="jbgj" />
+      <SwiperSlide key={index}>
+        <img key={index} className='h-[30rem] rounded-lg w-full ' src={photo.url_max} alt="jbgj" />
+      </SwiperSlide>
 
       ))}
+      </Swiper>
       </div>
 
 

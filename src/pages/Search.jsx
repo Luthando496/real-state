@@ -118,17 +118,17 @@ const Search = () => {
     {/* {loading ? <Spinner /> : ''} */}
 
 
-    <div className="w-full my-10">
+    <div className="w-full my-10 bg-gray-200 shadow-lg shadow-orange-400 py-20 rounded-t-3xl">
     {loading ? <Spinner /> :houses ? (
     <div className="w-[95%] mx-auto grid grid-cols-1 gap-10 md:grid-cols-3 ">
         {houses?.result?.map((h,i)=>(
             <div key={h.id} className="flex flex-col space-y-2 border shadow-lg shadow-slate-600">
             <div >
 
-            <Link to={`/details/${h.id}`}>
+            <Link to={`/details/${h.id.split('_')[2]}`}>
             <div  className="img relative overflow-hidden">
                 <img src={h.max_1440_photo_url || h.photoMainUrl} alt="kdkd" className='h-[18rem] object-cover w-full hover:scale-125 duration-300' />
-                <p className='absolute bottom-0 right-0 bg-green-500 text-white px-4 p-2'>{h.reviewScoreWord}</p>
+                <p className='absolute bottom-0 right-0 bg-green-500 text-white px-4 p-2'>{h.review_score_word}</p>
             </div>
             </Link>
             <div className='px-6 text-left space-y-3'>
