@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import {FcHome} from 'react-icons/fc'
 import {FaBed,FaSwimmingPool,FaParking} from 'react-icons/fa'
 import {GiBathtub,GiSofa,GiGate} from 'react-icons/gi'
-import {AiOutlineCheck,AiFillPhone,AiFillStar} from 'react-icons/ai'
+import {AiOutlineCheck,AiOutlineStar,AiFillStar} from 'react-icons/ai'
 import {TiSocialTwitter,TiSocialVimeo} from 'react-icons/ti'
 import { getDetails, getPhotos } from '../Store/Actions/ProductsActions'
 import { useDispatch, useSelector } from 'react-redux'
@@ -201,11 +201,42 @@ const HomeDetails = () => {
     {reviews?.result?.slice(0,9).map((review, index) => (
       <article key={index} className='w-[95%] mb-4 mt-8 lg:w-[70%] ml-2 lg:ml-[5rem] bg-teal-700 py-4 px-8 overflow-hidden min-h-[40vh]' >
     <div className='px-8 flex gap-2'>
+    {Math.round(review?.average_score) === 1? (<div className="flex gap-2">
+    <AiFillStar fill='gold' className='text-3xl' />
+    <AiOutlineStar className='text-3xl' />
+    <AiOutlineStar className='text-3xl' />
+    <AiOutlineStar className='text-3xl' />
+    <AiOutlineStar className='text-3xl' />
+    </div>)  : Math.round(review?.average_score) === 2 ?(<div className="flex gap-2">
+    <AiFillStar fill='gold' className='text-3xl' />
+    <AiFillStar fill='gold' className='text-3xl' />
+    <AiOutlineStar  className='text-3xl' />
+    <AiOutlineStar  className='text-3xl' />
+    <AiOutlineStar  className='text-3xl' />
+    </div>) : Math.round(review?.average_score) === 3 ? (<div className="flex gap-2">
+    <AiFillStar fill='gold' className='text-3xl' />
+    <AiFillStar fill='gold' className='text-3xl' />
+    <AiFillStar fill='gold' className='text-3xl' />
+    <AiOutlineStar  className='text-3xl' />
+    <AiOutlineStar  className='text-3xl' />
+    </div>) :  Math.round(review?.average_score) === 4 ? (<div className="flex gap-2">
+    <AiFillStar fill='gold' className='text-3xl' />
+    <AiFillStar fill='gold' className='text-3xl' />
+    <AiFillStar fill='gold' className='text-3xl' />
+    <AiFillStar fill='gold' className='text-3xl' />
+    <AiOutlineStar  className='text-3xl' />
+    </div>) :Math.round(review?.average_score) === 5 ? (<div className="flex gap-2">
     <AiFillStar fill='gold' className='text-3xl' />
     <AiFillStar fill='gold' className='text-3xl' />
     <AiFillStar fill='gold' className='text-3xl' />
     <AiFillStar fill='gold' className='text-3xl' />
     <AiFillStar fill='gold' className='text-3xl' />
+    </div>) :'' }
+    
+    {/* <AiFillStar fill='gold' className='text-3xl' />
+    <AiFillStar fill='gold' className='text-3xl' />
+    <AiFillStar fill='gold' className='text-3xl' />
+    <AiFillStar fill='gold' className='text-3xl' /> */}
     </div>
     <div className='px-8 gap-2 w-[70%] mt-2 flex flex-col'>
       <h2 className='text-xl lg:text-2xl font-bold leading-[1.7] text-amber-500 capitalize'>{review.title}</h2>
