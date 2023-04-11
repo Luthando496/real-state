@@ -78,7 +78,7 @@ const Footer= () => {
         
         <div className="footer w-full bg-black">
       <div className="wrap flex justify-center pt-10">
-        <img src="public/luthando-high-resolution-logo-white-on-black-background.png" alt="jkj" className='w-[25rem] h-40' />
+        <img src="/assets/luthando-high-resolution-logo-white-on-black-background.png" alt="jkj" className='w-[25rem] h-40' />
       </div>
       <div className="pt-20 text-center text-white py-5">
         <p className="text-xl">© 2023. All rights reserved. Designed by Luthando Didiza</p>
