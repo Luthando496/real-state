@@ -199,7 +199,7 @@ const HomeDetails = () => {
     <h1 className="text-center text-5xl font-bold text-cyan-600">Reviews</h1>
 
     {reviews?.result?.slice(0,9).map((review, index) => (
-      <article key={index} className='w-[95%] mb-4 mt-8 lg:w-[70%] ml-[5rem] bg-teal-700 py-4 px-8 overflow-hidden min-h-[40vh]' >
+      <article key={index} className='w-[95%] mb-4 mt-8 lg:w-[70%] ml-2 lg:ml-[5rem] bg-teal-700 py-4 px-8 overflow-hidden min-h-[40vh]' >
     <div className='px-8 flex gap-2'>
     <AiFillStar fill='gold' className='text-3xl' />
     <AiFillStar fill='gold' className='text-3xl' />
