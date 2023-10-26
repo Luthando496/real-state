@@ -2,6 +2,9 @@ import {productAction} from '../store'
 import axios from 'axios'
 
 
+
+// let the room 1
+
 export const getProducts = (city,room,adults,kids,sort) =>
     async dispatch =>{
         try{
@@ -21,8 +24,8 @@ export const getProducts = (city,room,adults,kids,sort) =>
                     room_number: `${room}` || '1',
                     dest_id: `${city}`,
                     filter_by_currency: 'ZAR',
-                    checkout_date: '2023-09-06',
-                    checkin_date: '2023-09-05',
+                    checkout_date: '2023-12-06',
+                    checkin_date: '2023-12-05',
                     children_ages: '5,0',
                     include_adjacency: 'true',
                     children_number: `${kids}` || '1',
