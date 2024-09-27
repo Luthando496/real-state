@@ -36,6 +36,8 @@ const HomeDetails = () => {
     dispatch(getDetails(id))
     dispatch(Reviews(id))
   },[dispatch])
+
+  console.log(details?.sustainability?.hotel_page?.title)
   return (
     <>
     <header className='w-full relative py-[8rem] min-h-[120vh] about'>
@@ -167,7 +169,7 @@ const HomeDetails = () => {
     {/*  */}
     <div className="neigh relative">
     <img src={photos && photos[2].url_max} alt="dsd" className="absolute top-0 left-0 w-full h-full" />
-      <div className="wrap flex justify-end mx-2 md:mr-20 items-center h-full">
+      {/* <div className="wrap flex justify-end mx-2 md:mr-20 items-center h-full">
       <div className="bg-white py-8 px-10 space-y-5 w-[100%] lg:w-[40%] absolute  top-5 right-5">
       <h1 className="text-4xl uppercase text-center">{details?.sustainability?.hotel_page?.title}</h1>
       <p className="text-xl text-center">{details?.address}</p>
@@ -175,7 +177,7 @@ const HomeDetails = () => {
 
       </div>
 
-      </div>
+      </div> */}
     </div>
     {/*  */}
 
