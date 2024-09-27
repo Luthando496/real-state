@@ -19,6 +19,14 @@ const Search = () => {
     const {city} = useParams()
     const year =`${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`
 
+    let currentDate = {
+        day: new Date().getDay(),
+        month: new Date().getMonth(),
+        year: new Date().getFullYear(),
+    }
+
+    console.log(currentDate)
+
     useEffect(()=>{
 
         dispatch(getProducts(city,room,adults,kids,sort,year))
@@ -81,7 +89,7 @@ const Search = () => {
         </div>
         {/*  */}
         <div className="form-inp my-2">
-            <select className="w-full p-2 bg-sky-500" onChange={e=>setAdult(e.target.value)}   >
+            <select defaultValue="1" className="w-full p-2 bg-sky-500" onChange={e=>setAdult(e.target.value)}   >
                 <option selected value="1">No of Adults</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -102,13 +110,13 @@ const Search = () => {
         <div className="form-inp my-2">
         <p className='text-cyan-600'>Check in Date</p>
         <input type="date" id="start" name="trip-start"
-       min="2023-03-21" className='w-full p-2 bg-blue-800' max="2023-07-24" />
+       min={`${currentDate.year}-${currentDate.month}-${currentDate.day}`} className='w-full p-2 bg-blue-800'  />
         </div>
         {/*  */}
         <div className="form-inp my-2">
         <p className='text-cyan-600'>Check in Date</p>
         <input type="date" id="start" name="trip-start"
-       min="2023-03-21" className='w-full p-2 bg-blue-800' max="2023-07-24" />
+       className='w-full p-2 bg-blue-800'/>
         </div>
         {/*  */}
 

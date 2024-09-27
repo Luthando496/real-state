@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import 'swiper/css';
 import HomePage from './pages/HomePage';
 import Search from './pages/Search';
-
+import 'leaflet/dist/leaflet.css';
 
 
 
