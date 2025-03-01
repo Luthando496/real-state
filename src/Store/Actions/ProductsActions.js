@@ -5,55 +5,79 @@ import axios from 'axios'
 
 // let the room 1
 
-export const getProducts = (city,room,adults,kids,sort) =>
-    async dispatch =>{
-        try{
-
-            // let room_number = `${room}` ? `${room}` :'1'
-            console.log(city,room,adults,kids,sort)
-
-            dispatch(productAction.allProductsRequest())
+export const getProducts = (
+    city, 
+    room, 
+    adults, 
+    kids, 
+    sort, 
+    checkInDate, 
+    checkOutDate
+) =>
+    async (dispatch) => {
+      try {
+        // Default values
+        
+        // Log search parameters for debugging
+        // console.log('Search params:', { 
+        //   city, room, adults, kids, sort, 
+        //   checkInDate: checkInDate || defaultCheckInDate, 
+        //   checkOutDate: checkOutDate || defaultCheckOutDate 
+        // });
+        
+        // Dispatch request action to update loading state
+        dispatch(productAction.allProductsRequest());
+        
+        // Make API request
+        const { data } = await axios.get('https://booking-com.p.rapidapi.com/v1/hotels/search', {
+          params: {
+            // Mandatory parameters
+            dest_id: city,
+            dest_type: 'city',
             
-            const {data} = await axios.get(`https://booking-com.p.rapidapi.com/v1/hotels/search`,{
-                params: {
-                    order_by: `${sort}` || 'popularity',
-                    adults_number: `${adults}` || '1',
-                    locale: 'en-gb',
-                    dest_type: 'city',
-                    units: 'metric',
-                    room_number: `${room}` || '1',
-                    dest_id: `${city}`,
-                    filter_by_currency: 'ZAR',
-                    checkout_date: '2024-12-06',
-                    checkin_date: '2024-12-05',
-                    children_ages: '5,0',
-                    include_adjacency: 'true',
-                    children_number: `${kids}` || '1',
-                    page_number: '2'
-                  },
-                  headers: {
-                    'X-RapidAPI-Key': '9ca1b675cbmsh0a118d1e4608e5fp179722jsn09c6585af4f5',
-                    'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
-                  }
-            })
-
-            console.log(data)
-
-
-
-            dispatch(productAction.ProductsSuccess(data))
-
-
-
-        }catch(err){
-            console.log(err.response && err.response.data.message
-                ? err.response.data.message
-                : err.message)
-            dispatch(productAction.ProductsFail(err.response && err.response.data.message
-                ? err.response.data.message
-                : err.message))
-        }
-}
+            // Date parameters (use provided dates or defaults)
+            checkin_date: checkInDate,
+            checkout_date: checkOutDate,
+            
+            // Room and guest parameters
+            room_number: room || '1',
+            adults_number: adults || '1',
+            children_number: kids || '0',
+            children_ages: kids && parseInt(kids) > 0 ? '5,0' : '',
+            
+            // Sorting and filtering
+            order_by: sort || 'popularity',
+            filter_by_currency: 'ZAR',
+            
+            // Additional parameters
+            locale: 'en-gb',
+            units: 'metric',
+            include_adjacency: 'true',
+            page_number: '2'  // Changed from '2' to '1' to show first page of results
+          },
+          headers: {
+            'X-RapidAPI-Key': '9ca1b675cbmsh0a118d1e4608e5fp179722jsn09c6585af4f5',
+            'X-RapidAPI-Host': 'booking-com.p.rapidapi.com'
+          }
+        });
+        
+        console.log('API response:', data);
+        
+        // Dispatch success action with data
+        dispatch(productAction.ProductsSuccess(data));
+        
+      } catch (err) {
+        // Extract error message
+        const errorMessage = err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message;
+          
+        console.error('API error:', errorMessage);
+        
+        // Dispatch failure action with error message
+        dispatch(productAction.ProductsFail(errorMessage));
+      }
+    };
 
 
 export const getDetails = (id) =>

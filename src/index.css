@@ -8,6 +8,10 @@
 @tailwind components;
 @tailwind utilities;
 
+img{
+  object-fit: cover;
+}
+
 .about-header{
   background:linear-gradient(rgba(0,0,0,0),rgba(0, 0, 0, 0.87)),url('./assets/4e2e593c8f46dd5d9b8a9f0d85c1e686.jpg');
   background-position: center;
@@ -88,7 +92,7 @@ font-size: 2rem;
 }
 
 .neigh{
-  background: url('https://images.pexels.com/photos/221457/pexels-photo-221457.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+  /* background: url('https://images.pexels.com/photos/221457/pexels-photo-221457.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); */
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
