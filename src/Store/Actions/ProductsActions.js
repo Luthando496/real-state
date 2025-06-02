@@ -24,10 +24,34 @@ export const getProducts = (
         //   checkInDate: checkInDate || defaultCheckInDate, 
         //   checkOutDate: checkOutDate || defaultCheckOutDate 
         // });
+         
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
         
+        const formatDate = (date) => {
+            return date.toISOString().split('T')[0];
+        };
+        
+        const minCheckInDate = formatDate(today);
+        const minCheckOutDate = checkInDate 
+            ? formatDate(new Date(checkInDate + 'T00:00:00')) 
+            : formatDate(tomorrow);
+        
+        // Current year formatted for API
+        const currentYear = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
         // Dispatch request action to update loading state
         dispatch(productAction.allProductsRequest());
         
+        if(!checkInDate || checkInDate === ''){
+          checkInDate =  currentYear
+        }
+        
+        if(!checkOutDate || checkOutDate === ''){
+            checkOutDate =  minCheckOutDate
+          }
+          
+          console.log(`Your Check IN Date: ${checkInDate}. ${currentYear} Your Check OUT Date:${checkOutDate}`)
         // Make API request
         const { data } = await axios.get('https://booking-com.p.rapidapi.com/v1/hotels/search', {
           params: {
@@ -42,7 +66,7 @@ export const getProducts = (
             // Room and guest parameters
             room_number: room || '1',
             adults_number: adults || '1',
-            children_number: kids || '0',
+            children_number: kids || '1',
             children_ages: kids && parseInt(kids) > 0 ? '5,0' : '',
             
             // Sorting and filtering
